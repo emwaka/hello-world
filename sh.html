@@ -1,0 +1,77 @@
+
+<html>
+  <head>
+    <link rel="stylesheet" href="index.css">
+  </head>
+
+  <body>
+
+  <form id="shit" onSubmit="return handleForm(this)">
+    <input name="salary" type="number" placeholder="Monthly sallary"> 
+    <button type="submit">Make money $$$</button>
+  </form>
+
+    <div id="treasure"></div></body>
+
+  <script>
+    // UI elements
+const form = document.querySelector('form')
+const button = document.querySelector('button')
+const input = document.querySelector('input')
+const treasure = document.querySelector('#treasure')
+
+// state 
+let shitting = false
+let shitTreasure = 0 // TODO: initailly get from localStorage
+let salary = 0
+
+let timer = null
+
+const moneyMake = {
+  start: (tot, salary) => {
+    // money per second
+    const salaryPerSecond = salary / 40 / 3600
+    console.log(salaryPerSecond)
+
+    return salaryPerSecond
+  },
+
+  stop: () => {
+    // stop incrementer
+
+  }
+}
+
+function init() {
+  treasure.innerText = shitTreasure
+}
+
+function handleForm(form) {
+  if(form.salary.value) {
+    salary = form.salary.value
+    toggle()
+  }
+  return false
+}
+
+
+function toggle() {  
+  if (shitting) {  
+    moneyMake.stop()
+    input.disabled = false
+    button.innerText = 'Make money $$$'
+  } else {
+    moneyMake.start(treasure, salary)
+    input.disabled = true
+    button.innerText = 'Finish making money'
+  }
+
+  // toggle shitter state
+  shitting = !shitting
+  return false
+}
+
+
+init()
+  </script>
+</html>
